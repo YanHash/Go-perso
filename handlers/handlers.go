@@ -13,12 +13,12 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"/home/yanis/Bureau/IDEES/goLang/Go-perso/types/types"
+	"Go-perso/types"
 )
 
 var client *mongo.Client
 
-func initMongoDB() {
+func InitMongoDB() {
 	if err := godotenv.Load(); err != nil {
 		log.Fatal(".env file not found !")
 	}
@@ -41,7 +41,7 @@ func initMongoDB() {
 	client = cli
 }
 
-func getTools(w http.ResponseWriter, r *http.Request) {
+func GetTools(w http.ResponseWriter, r *http.Request) {
 	var tools []types.Tool
 	collection := client.Database("portfolio").Collection("Tools")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -73,7 +73,7 @@ func getTools(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(tools)
 }
 
-func getExperience(w http.ResponseWriter, r *http.Request) {
+func GetExperience(w http.ResponseWriter, r *http.Request) {
 	var xp []types.Experience
 	collection := client.Database("portfolio").Collection("Experience")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -105,7 +105,7 @@ func getExperience(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(xp)
 }
 
-func getEducation(w http.ResponseWriter, r *http.Request) {
+func GetEducation(w http.ResponseWriter, r *http.Request) {
 	var edu []types.Education
 	collection := client.Database("portfolio").Collection("Education")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -137,7 +137,7 @@ func getEducation(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(edu)
 }
 
-func getContact(w http.ResponseWriter, r *http.Request) {
+func GetContact(w http.ResponseWriter, r *http.Request) {
 	var contacts []types.Contact
 	collection := client.Database("portfolio").Collection("Contacts")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
